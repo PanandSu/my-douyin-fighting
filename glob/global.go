@@ -37,7 +37,7 @@ var (
 	}
 )
 var (
-	FavoriteExpire      = 10 * time.Minute
+	LikeExpire          = 10 * time.Minute
 	VideoCommentsExpire = 10 * time.Minute
 	CommentExpire       = 10 * time.Minute
 	FollowExpire        = 10 * time.Minute
