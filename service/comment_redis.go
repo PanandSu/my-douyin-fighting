@@ -80,8 +80,11 @@ func GoComment(c *model.Comment) error {
 }
 
 /*
+key := fmt.Sprintf(":%d", )
 lua := redis.NewScript("")
-keys := []string{}
-args := []any{}
+keys := []string{key}
+args := []any{
+gb. .Seconds() + gb.ExpireTimeJitter.Seconds()*rand2.Float64(),
+}
 lua.Run(gb.Ctx, cache, keys, args)
 */

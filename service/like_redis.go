@@ -142,17 +142,59 @@ func (r *likeREdis) Unlike(uid, vid, aid uint) error {
 	}
 }
 func (r *likeREdis) GetLikeVids(uid uint) ([]uint, error) {
-
+	key := fmt.Sprintf("like:%d", uid)
+	lua := redis.NewScript("")
+	keys := []string{key}
+	args := []any{
+		gb.LikeExpire.Seconds() + gb.ExpireTimeJitter.Seconds()*rand2.Float64(),
+	}
+	lua.Run(gb.Ctx, cache, keys, args)
 }
 func (r *likeREdis) GetLikeCount(vid uint) (int, error) {
-
+	key := fmt.Sprintf("video:%d", vid)
+	lua := redis.NewScript("")
+	keys := []string{key}
+	args := []any{
+		gb.VideoExpire.Seconds() + gb.ExpireTimeJitter.Seconds()*rand2.Float64(),
+	}
+	lua.Run(gb.Ctx, cache, keys, args)
 }
 func (r *likeREdis) AddLikeCount(vid uint, likeCount int) error {
-
+	key := fmt.Sprintf("video:%d", vid)
+	lua := redis.NewScript("")
+	keys := []string{key}
+	args := []any{
+		likeCount,
+		gb.VideoExpire.Seconds() + gb.ExpireTimeJitter.Seconds()*rand2.Float64(),
+	}
+	lua.Run(gb.Ctx, cache, keys, args)
 }
-func (r *likeREdis) GetLikeCountList(vids []uint) ([]int, error) {
-
+func (r *likeREdis) GetLikeCountList(vids []uint) ([]int, []uint, error) {
+	n := len(vids)
+	likeCounts := make([]int, n)
+	noInCache := make([]uint, n)
+	for _, vid := range vids {
+		likeCount, err := r.GetLikeCount(vid)
+		if err != nil {
+			panic(err)
+		} else if err == nil {
+			likeCounts = append(likeCounts, likeCount)
+		} else {
+			likeCounts = append(likeCounts, -1)
+			noInCache = append(noInCache, vid)
+		}
+	}
+	return likeCounts, noInCache, nil
 }
-func (r *likeREdis) AddLikeCountList(vs VideoLikeAPI) {
+func (r *likeREdis) AddLikeCountList(vs []VideoLikeCountAPI) error {
+	for _, v := range vs {
+		r.AddLikeCount(v.VideoID, v.LikeCount)
+	}
+	return nil
+}
 
+// VideoLikeCountAPI 接收视频喜欢数目的 api 结构体
+type VideoLikeCountAPI struct {
+	VideoID   uint
+	LikeCount int
 }
