@@ -1,4 +1,4 @@
-package glob
+package gb
 
 import (
 	"context"
@@ -11,10 +11,10 @@ import (
 )
 
 var (
-	Config         config.System
+	Cfg            config.System
 	DB             *gorm.DB
 	Redis          *redis.Client
-	Context        = context.Background()
+	Ctx            = context.Background()
 	FileTypeMap    sync.Map
 	IdGenerator    *sonyflake.Sonyflake
 	StartTime      time.Time
@@ -35,4 +35,15 @@ var (
 		".aac":  true,
 		".aiff": true,
 	}
+)
+var (
+	FavoriteExpire      = 10 * time.Minute
+	VideoCommentsExpire = 10 * time.Minute
+	CommentExpire       = 10 * time.Minute
+	FollowExpire        = 10 * time.Minute
+	UserInfoExpire      = 10 * time.Minute
+	VideoExpire         = 10 * time.Minute
+	PublishExpire       = 10 * time.Minute
+	EmptyExpire         = 10 * time.Minute
+	ExpireTimeJitter    = 10 * time.Minute
 )
