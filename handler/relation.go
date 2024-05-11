@@ -2,6 +2,9 @@ package handler
 
 import "github.com/gin-gonic/gin"
 
+type UserResponse struct {
+}
+
 func Follow(c *gin.Context)   {}
 func Unfollow(c *gin.Context) {}
 

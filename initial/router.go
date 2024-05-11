@@ -2,7 +2,6 @@ package initial
 
 import (
 	"github.com/gin-gonic/gin"
-	"my-douyin-fighting/glob"
 	"my-douyin-fighting/handler"
 	"strconv"
 )
@@ -17,7 +16,7 @@ func Route() {
 		api.POST("/user/login", handler.Login)
 		api.GET("/publish/list", handler.PublishList)
 
-		api.GET("/favorite/list", handler.FavoriteList)
+		api.GET("/favorite/list", handler.LikeList)
 		api.GET("/comment/list", handler.CommentList)
 
 		api.GET("/relation/follow/list", handler.FollowList)
