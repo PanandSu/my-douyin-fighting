@@ -7,11 +7,11 @@ import (
 )
 
 func Redis() {
-	redisConfig := glob.Config.RedisConfig
+	redisConfig := gb.Cfg.RedisConfig
 	rdb := redis.NewClient(&redis.Options{
 		Addr:     redisConfig.Host + strconv.Itoa(redisConfig.Port),
 		Password: redisConfig.Password,
 	})
-	rdb.Ping(glob.Context)
-	glob.Redis = rdb
+	rdb.Ping(gb.Ctx)
+	gb.Redis = rdb
 }

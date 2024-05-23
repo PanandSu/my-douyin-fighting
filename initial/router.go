@@ -2,6 +2,7 @@ package initial
 
 import (
 	"github.com/gin-gonic/gin"
+	gb "my-douyin-fighting/glob"
 	"my-douyin-fighting/handler"
 	"strconv"
 )
@@ -22,7 +23,7 @@ func Route() {
 		api.GET("/relation/follow/list", handler.FollowList)
 		api.GET("/relation/follower/list", handler.FollowerList)
 	}
-	addr := glob.Config.GinConfig.Host + strconv.Itoa(glob.Config.GinConfig.Port)
+	addr := gb.Cfg.GinConfig.Host + strconv.Itoa(gb.Cfg.GinConfig.Port)
 	if err := r.Run(addr); err != nil {
 		panic(err)
 	}
