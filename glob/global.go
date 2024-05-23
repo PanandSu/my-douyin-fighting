@@ -11,20 +11,22 @@ import (
 )
 
 var (
-	Cfg            config.System
-	DB             *gorm.DB
-	Redis          *redis.Client
-	Ctx            = context.Background()
-	FileTypeMap    sync.Map
-	IdGenerator    *sonyflake.Sonyflake
-	StartTime      time.Time
-	VideoAddr      string
-	CoverAddr      string
-	MaxFileSize    int64
-	MaxTitleLen    = 140
-	MaxCommentLen  = 300
-	AutoCreateDB   = true
-	WhitelistVideo = map[string]bool{
+	Cfg               config.System
+	DB                *gorm.DB
+	Redis             *redis.Client
+	Ctx               = context.Background()
+	FileTypeMap       sync.Map
+	IdGenerator       *sonyflake.Sonyflake
+	StartTime         time.Time
+	VideoAddr         string
+	CoverAddr         string
+	MaxFileSize       int64
+	MaxTitleLen       = 140
+	MaxCommentLen     = 300
+	MaxUsernameLength = 32
+	PasswordPattern   = `^[_0-9A-Za-z]{6,32}$`
+	AutoCreateDB      = true
+	WhitelistVideo    = map[string]bool{
 		".mp4":  true,
 		".avi":  true,
 		".flv":  true,

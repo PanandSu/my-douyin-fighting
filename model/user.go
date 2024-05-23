@@ -8,8 +8,8 @@ type User struct {
 	Password      string
 	FollowCount   uint
 	FollowerCount uint
+	TotalLike     uint
+	LikeCount     uint
 	CreatedAt     time.Time
 	ExtInfo       *string
-	TotalLike     int
-	LikeCount     int
 }
