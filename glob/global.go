@@ -17,27 +17,30 @@ var (
 	Ctx               = context.Background()
 	FileTypeMap       sync.Map
 	IdGenerator       *sonyflake.Sonyflake
-	StartTime         time.Time
-	VideoAddr         string
-	CoverAddr         string
-	MaxFileSize       int64
+	StartTime         = "2022-05-21 00:00:01"
+	VideoAddr         = "./public/video"
+	CoverAddr         = "./public/cover"
+	MaxFileSize       = int64(10 << 20)
 	MaxTitleLen       = 140
 	MaxCommentLen     = 300
+	FeedNum           = 30
 	MaxUsernameLength = 32
 	PasswordPattern   = `^[_0-9A-Za-z]{6,32}$`
 	AutoCreateDB      = true
 	WhitelistVideo    = map[string]bool{
 		".mp4":  true,
 		".avi":  true,
-		".flv":  true,
+		".wmv":  true,
+		".mpeg": true,
 		".mov":  true,
-		".mp3":  true,
-		".ogg":  true,
-		".wav":  true,
-		".aac":  true,
-		".aiff": true,
+		".flv":  true,
+		".rmvb": true,
+		".3gb":  true,
+		".vob":  true,
+		".m4v":  true,
 	}
 )
+
 var (
 	LikeExpire          = 10 * time.Minute
 	VideoCommentsExpire = 10 * time.Minute
