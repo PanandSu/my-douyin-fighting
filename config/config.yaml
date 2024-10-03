@@ -1,0 +1,20 @@
+mysql:
+    host: 127.0.0.1
+    port: 3306
+    username: root
+    password: pansu
+    dbname: 0
+    max_open_conns: 0
+    max_idle_conns: 0
+
+redis:
+    host: 127.0.0.1
+    port: 0
+    password: pansu
+
+gin:
+    host: 127.0.0.1
+    port: 8899
+jwt:
+    signing_key: panjinhao
+

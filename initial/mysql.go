@@ -2,14 +2,14 @@ package initial
 
 import (
 	"fmt"
+	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	gb "my-douyin-fighting/glob"
 )
-import "gorm.io/driver/mysql"
 
 func Mysql() {
 	c := gb.Cfg.MysqlConfig
-	username, password, host, port, dbname, maxopenconns, maxidelconns := c.Username, c.Password, c.Host, c.Password, c.DBName, c.MaxOpenConns, c.MaxIdleConns
+	username, password, host, port, dbname, maxopenconns, maxidleconns := c.Username, c.Password, c.Host, c.Password, c.DBName, c.MaxOpenConns, c.MaxIdleConns
 	dsn := fmt.Sprintf(
 		"%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
 		username, password, host, port, dbname,
@@ -23,7 +23,7 @@ func Mysql() {
 	gb.DB = db
 	sql, _ := db.DB()
 	sql.SetMaxOpenConns(maxopenconns)
-	sql.SetMaxIdleConns(maxidelconns)
+	sql.SetMaxIdleConns(maxidleconns)
 	if err != nil {
 		return
 	}
