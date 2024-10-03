@@ -30,5 +30,4 @@ func Mysql() {
 	if gb.AutoCreateDB {
 
 	}
-
 }
