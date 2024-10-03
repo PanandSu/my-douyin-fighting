@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
+	"log"
 	gb "my-douyin-fighting/glob"
 )
 
@@ -13,14 +14,15 @@ func Viper() {
 	viper.SetConfigFile("./config/config.yaml")
 	err = viper.ReadInConfig()
 	if err != nil {
-		return
+		log.Panic("读取配置文件失败")
 	}
 	err = viper.Unmarshal(&gb.Cfg)
 	if err != nil {
-		return
+		log.Panic("viper反序列化失败")
 	}
+	fmt.Println(gb.Cfg)
 	viper.WatchConfig()
 	viper.OnConfigChange(func(e fsnotify.Event) {
-		fmt.Println(e)
+		log.Println("配置文件被修改:", e.Name)
 	})
 }
